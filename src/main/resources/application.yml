@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: mcp-websearch-server
+
+# Server configuration for Spring Boot
+server:
+  port: ${MCP_SERVER_PORT:3000}
+  address: ${MCP_SERVER_HOST:127.0.0.1}
+
+# WebSearch Application Configuration
+websearch:
+  provider: duckduckgo  # duckduckgo or brave
+  max-concurrent-requests: 4
+  rate-limit: 10
+  rate-limit-window-seconds: 60
+  search-results-count: 10
+  search-result-max-length: 400
+  fetch-result-max-length: 5000
+  debug: ${DEBUG_MODE:false}
+  
+  # DuckDuckGo suspension settings
+  duckduckgo:
+    suspension-duration-minutes: 20
+    max-suspension-multiplier: 6
+  
+  # Preferred sites configuration file
+  preferred-sites-file: classpath:preferred_sites.json
+
+# Logging Configuration
+logging:
+  level:
+    root: WARN
+    com.xtivia.mcp: ${LOG_LEVEL:INFO}
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
